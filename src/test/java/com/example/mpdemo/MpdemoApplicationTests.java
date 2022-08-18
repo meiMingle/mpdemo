@@ -75,13 +75,13 @@ class MpdemoApplicationTests {
     @Test
     void QrCodeTest() throws WriterException {
         System.out.println(("----- QrCode method test ------"));
-        String myCodeText = "Hello !!!@@@";
+        String myCodeText = "这是一段测试QR-CODE的文字█▀▄";
         int size = 512;
         Map<EncodeHintType, Object> crunchifyHintType = new EnumMap<>(EncodeHintType.class);
         crunchifyHintType.put(EncodeHintType.CHARACTER_SET, "UTF-8");
         // Now with version 3.4.1 you could change margin (white border size)
         crunchifyHintType.put(EncodeHintType.MARGIN, 1); /* default = 4 */
-        Object put = crunchifyHintType.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+        Object put = crunchifyHintType.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q);
         QRCodeWriter mYQRCodeWriter = new QRCodeWriter(); // throws com.google.zxing.WriterException
         BitMatrix crunchifyBitMatrix = mYQRCodeWriter.encode(myCodeText, BarcodeFormat.QR_CODE, 0,
                 0, crunchifyHintType);
@@ -97,7 +97,7 @@ class MpdemoApplicationTests {
         for (int i = 0; i <= height; i+=2) {
             for (int j = 0; j < width; j++) {
                 boolean tp = crunchifyBitMatrix.get(i, j);
-                boolean bt = i + 1 <= height && crunchifyBitMatrix.get(i + 1, j);
+                boolean bt = i + 1 >= height || crunchifyBitMatrix.get(i + 1, j);
                 if(tp &&bt){
                     result.append(' ');
                 } else if (tp) {
