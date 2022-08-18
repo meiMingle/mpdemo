@@ -21,8 +21,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-@SpringBootTest
-@Rollback(value = false)
+//@SpringBootTest
+//@Rollback(value = false)
 class MpdemoApplicationTests {
 
     @Autowired
@@ -85,9 +85,33 @@ class MpdemoApplicationTests {
         QRCodeWriter mYQRCodeWriter = new QRCodeWriter(); // throws com.google.zxing.WriterException
         BitMatrix crunchifyBitMatrix = mYQRCodeWriter.encode(myCodeText, BarcodeFormat.QR_CODE, 0,
                 0, crunchifyHintType);
+        //\u2588完整方块
+        final char FULL_BLACK_CHAR= '█';
+        //\u2580上半方块
+        final char TOP_BLACK_CHAR= '▀';
+        //\u2584下半方块
+        final char BOTTOM_BLACK_CHAR= '▄';
+        int width = crunchifyBitMatrix.getWidth();
+        int height = crunchifyBitMatrix.getHeight();
+        StringBuilder result = new StringBuilder(height * (width + 1));
+        for (int i = 0; i <= height; i+=2) {
+            for (int j = 0; j < width; j++) {
+                boolean tp = crunchifyBitMatrix.get(i, j);
+                boolean bt = i + 1 <= height && crunchifyBitMatrix.get(i + 1, j);
+                if(tp &&bt){
+                    result.append(' ');
+                } else if (tp) {
+                    result.append(BOTTOM_BLACK_CHAR);
+                } else if (bt) {
+                    result.append(TOP_BLACK_CHAR);
+                } else {
+                    result.append(FULL_BLACK_CHAR);
+                }
 
-        String s = crunchifyBitMatrix.toString("  ","\u2588\u2588");
-        System.out.println(s);
+            }
+            result.append('\n');
+        }
+        System.out.println(result);
     }
 
 }
