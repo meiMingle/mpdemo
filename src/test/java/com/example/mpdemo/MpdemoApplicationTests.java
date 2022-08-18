@@ -77,15 +77,16 @@ class MpdemoApplicationTests {
         System.out.println(("----- QrCode method test ------"));
         String myCodeText = "Hello !!!@@@";
         int size = 512;
-        Map<EncodeHintType, Object> crunchifyHintType = new EnumMap<EncodeHintType, Object>(EncodeHintType.class);
+        Map<EncodeHintType, Object> crunchifyHintType = new EnumMap<>(EncodeHintType.class);
         crunchifyHintType.put(EncodeHintType.CHARACTER_SET, "UTF-8");
         // Now with version 3.4.1 you could change margin (white border size)
         crunchifyHintType.put(EncodeHintType.MARGIN, 1); /* default = 4 */
-        Object put = crunchifyHintType.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+        Object put = crunchifyHintType.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
         QRCodeWriter mYQRCodeWriter = new QRCodeWriter(); // throws com.google.zxing.WriterException
-        BitMatrix crunchifyBitMatrix = mYQRCodeWriter.encode(myCodeText, BarcodeFormat.QR_CODE, size,
-                size, crunchifyHintType);
-        String s = crunchifyBitMatrix.toString();
+        BitMatrix crunchifyBitMatrix = mYQRCodeWriter.encode(myCodeText, BarcodeFormat.QR_CODE, 0,
+                0, crunchifyHintType);
+
+        String s = crunchifyBitMatrix.toString("  ","\u2588\u2588");
         System.out.println(s);
     }
 
