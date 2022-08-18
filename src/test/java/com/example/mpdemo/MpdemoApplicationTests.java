@@ -6,12 +6,20 @@ import com.example.mpdemo.modules.businessa.mapper.EmployeesMapper;
 import com.example.mpdemo.modules.businessa.service.EmployeesService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 @SpringBootTest
 @Rollback(value = false)
@@ -64,6 +72,21 @@ class MpdemoApplicationTests {
         employeesService.remove(wrapper);
     }
 
-
+    @Test
+    void QrCodeTest() throws WriterException {
+        System.out.println(("----- QrCode method test ------"));
+        String myCodeText = "Hello !!!@@@";
+        int size = 512;
+        Map<EncodeHintType, Object> crunchifyHintType = new EnumMap<EncodeHintType, Object>(EncodeHintType.class);
+        crunchifyHintType.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+        // Now with version 3.4.1 you could change margin (white border size)
+        crunchifyHintType.put(EncodeHintType.MARGIN, 1); /* default = 4 */
+        Object put = crunchifyHintType.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+        QRCodeWriter mYQRCodeWriter = new QRCodeWriter(); // throws com.google.zxing.WriterException
+        BitMatrix crunchifyBitMatrix = mYQRCodeWriter.encode(myCodeText, BarcodeFormat.QR_CODE, size,
+                size, crunchifyHintType);
+        String s = crunchifyBitMatrix.toString();
+        System.out.println(s);
+    }
 
 }
