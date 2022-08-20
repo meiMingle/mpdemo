@@ -40,12 +40,6 @@ public class MpdemoApplication {
                 out.println("自定义banner加载失败");
                 return;
             }
-            //\u2588完整方块
-            final char FULL_BLACK_CHAR = '█';
-            //\u2580上半方块
-            final char TOP_BLACK_CHAR = '▀';
-            //\u2584下半方块
-            final char BOTTOM_BLACK_CHAR = '▄';
             int width = crunchifyBitMatrix.getWidth();
             int height = crunchifyBitMatrix.getHeight();
             StringBuilder result = new StringBuilder(height * (width + 1));
@@ -54,13 +48,13 @@ public class MpdemoApplication {
                     boolean tp = crunchifyBitMatrix.get(i, j);
                     boolean bt = i + 1 >= height || crunchifyBitMatrix.get(i + 1, j);
                     if (tp && bt) {
-                        result.append(' ');
+                        result.append(' ');//'\u0020'
                     } else if (tp) {
-                        result.append(BOTTOM_BLACK_CHAR);
+                        result.append('▄');//'\u2584'
                     } else if (bt) {
-                        result.append(TOP_BLACK_CHAR);
+                        result.append('▀');//'\u2580'
                     } else {
-                        result.append(FULL_BLACK_CHAR);
+                        result.append('█');//'\u2588'
                     }
 
                 }
