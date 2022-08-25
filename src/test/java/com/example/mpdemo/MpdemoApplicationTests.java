@@ -21,8 +21,8 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-//@SpringBootTest
-//@Rollback(value = false)
+@SpringBootTest
+@Rollback(value = false)
 class MpdemoApplicationTests {
 
     @Autowired
