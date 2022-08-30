@@ -25,9 +25,16 @@ class MybatisPlusFastTest {
 
 
     @Test
-    void baseMapperQuery() {
-        System.out.println(("----- selectAll method test ------"));
+    void baseServiceQuery() {
+        logger.info("----- service count method test ------");
         long count = employeesService.count();
+        logger.info("总条数:{}",count);
+    }
+
+    @Test
+    void baseMapperQuery() {
+        logger.info("----- mapper count method test ------");
+        long count = employeesMapper.selectCount(null);
         logger.info("总条数:{}",count);
     }
 }
