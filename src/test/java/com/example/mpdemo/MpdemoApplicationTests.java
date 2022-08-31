@@ -12,18 +12,22 @@ import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-@SpringBootTest
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = MpdemoApplication.class)
 @Rollback(value = false)
-class MpdemoApplicationTests {
+public class MpdemoApplicationTests {
 
     @Autowired
     EmployeesMapper employeesMapper;
@@ -31,41 +35,41 @@ class MpdemoApplicationTests {
     EmployeesService employeesService;
 
     @Test
-    void baseMapperQuery() {
+    public void baseMapperQuery() {
         System.out.println(("----- selectAll method test ------"));
         List<Employees> userList = employeesMapper.selectList(null);
         userList.forEach(System.out::println);
     }
 
     @Test
-    void customAnnotationQuery() {
+    public void customAnnotationQuery() {
         System.out.println(("----- Annotation method test ------"));
         List<Employees> userList = employeesMapper.selectByAnnotation("Lim%");
         userList.forEach(System.out::println);
     }
     @Test
-    void customXmlQuery() {
+    public void customXmlQuery() {
         System.out.println(("----- XmlQuery method test ------"));
         List<Employees> userList = employeesMapper.selectByXml("Lim%");
         userList.forEach(System.out::println);
     }
 
     @Test
-    void pagehelpr() {
+    public void pagehelpr() {
         System.out.println(("----- pagehelper method test ------"));
         long count = PageHelper.startPage(1, 2).doCount(() -> employeesMapper.selectList(null));
         System.out.println(count);
     }
 
     @Test
-    void pagehelprXml() {
+    public void pagehelprXml() {
         System.out.println(("----- pagehelperXml method test ------"));
         Page<Object> page = PageHelper.startPage(1, 2).doSelectPage(() -> employeesMapper.selectByXml("Lim%"));
         System.out.println(page);
     }
 
     @Test
-    void TransactionTest() {
+    public void TransactionTest() {
         System.out.println(("----- Transactional method test ------"));
         QueryWrapper<Employees> wrapper = new QueryWrapper<>();
         wrapper.likeRight("first_name", "Ji");
@@ -73,7 +77,7 @@ class MpdemoApplicationTests {
     }
 
     @Test
-    void QrCodeTest() throws WriterException {
+    public void QrCodeTest() throws WriterException {
         System.out.println(("----- QrCode method test ------"));
         String myCodeText = "这是一段测试QR-CODE的文字█▀▄";
         Map<EncodeHintType, Object> crunchifyHintType = new EnumMap<>(EncodeHintType.class);

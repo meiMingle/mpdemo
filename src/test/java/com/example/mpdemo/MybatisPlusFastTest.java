@@ -23,14 +23,14 @@ class MybatisPlusFastTest {
     @Autowired
     EmployeesService employeesService;
 
-
+//TODO
     @Test
     void baseServiceQuery() {
         logger.info("----- service count method test ------");
         long count = employeesService.count();
         logger.info("总条数:{}",count);
     }
-
+//TODO
     @Test
     void baseMapperQuery() {
         logger.info("----- mapper count method test ------");
