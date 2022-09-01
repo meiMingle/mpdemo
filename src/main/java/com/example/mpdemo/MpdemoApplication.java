@@ -9,10 +9,12 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.ansi.AnsiBackground;
 import org.springframework.boot.ansi.AnsiColor;
+import org.springframework.boot.ansi.AnsiColors;
 import org.springframework.boot.ansi.AnsiOutput;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.awt.*;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -25,19 +27,19 @@ public class MpdemoApplication {
 
         SpringApplication application = new SpringApplication(MpdemoApplication.class);
         application.setBanner((environment, sourceClass, out) -> {
-            String myCodeText = "这是一段测试QR-CODE的文字█▀▄";
+            String myCodeText = "SpringBoot Ascii Art Banner Test";
             Map<EncodeHintType, Object> crunchifyHintType = new EnumMap<>(EncodeHintType.class);
             crunchifyHintType.put(EncodeHintType.CHARACTER_SET, "UTF-8");
             // Now with version 3.4.1 you could change margin (white border size)
             crunchifyHintType.put(EncodeHintType.MARGIN, 1); /* default = 4 */
-            Object put = crunchifyHintType.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q);
+            crunchifyHintType.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.Q);
             QRCodeWriter mYQRCodeWriter = new QRCodeWriter(); // throws com.google.zxing.WriterException
             BitMatrix crunchifyBitMatrix = null;
             try {
                 crunchifyBitMatrix = mYQRCodeWriter.encode(myCodeText, BarcodeFormat.QR_CODE, 0,
                         0, crunchifyHintType);
             } catch (WriterException e) {
-                out.println("自定义banner加载失败");
+                out.println("load custom banner error");
                 return;
             }
             int width = crunchifyBitMatrix.getWidth();
@@ -60,8 +62,7 @@ public class MpdemoApplication {
                 }
                 result.append('\n');
             }
-
-            out.println(AnsiOutput.toString(AnsiColor.RED, result));
+            out.println(AnsiOutput.toString(AnsiColors.getClosest(new Color(50,220,100)), result));
         });
 
         application.run(args);
