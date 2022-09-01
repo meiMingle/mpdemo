@@ -27,7 +27,7 @@ import java.util.Map;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = MpdemoApplication.class)
 @Rollback(value = false)
-public class MpdemoApplicationTests {
+public class MpdemoApplicationJUnit4Test {
 
     @Autowired
     EmployeesMapper employeesMapper;
@@ -73,7 +73,11 @@ public class MpdemoApplicationTests {
         System.out.println(("----- Transactional method test ------"));
         QueryWrapper<Employees> wrapper = new QueryWrapper<>();
         wrapper.likeRight("first_name", "Ji");
-        employeesService.remove(wrapper);
+        try {
+            employeesService.remove(wrapper);
+        } catch (Exception e) {
+            System.out.println("Transactional test completed");
+        }
     }
 
     @Test

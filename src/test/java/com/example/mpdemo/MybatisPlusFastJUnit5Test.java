@@ -16,7 +16,7 @@ import org.springframework.test.annotation.Rollback;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ImportAutoConfiguration(value = {EmployeesServiceImpl.class})
 @Rollback(value = true)//单元测试执行完,默认回滚事务，false不会回滚
-class MybatisPlusFastTest {
+class MybatisPlusFastJUnit5Test {
     Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     EmployeesMapper employeesMapper;
