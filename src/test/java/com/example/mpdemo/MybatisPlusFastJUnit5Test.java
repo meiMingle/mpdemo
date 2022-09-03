@@ -15,7 +15,7 @@ import org.springframework.test.context.ContextConfiguration;
 
 @MybatisPlusTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-//@ImportAutoConfiguration(value = {EmployeesServiceImpl.class})
+//@ImportAutoConfiguration(value = {EmployeesServiceImpl.class})//ImportAutoConfiguration或者ContextConfiguration似乎都可以
 @ContextConfiguration(classes = {EmployeesServiceImpl.class})
 @Rollback(value = true)//单元测试执行完,默认回滚事务，false不会回滚
 class MybatisPlusFastJUnit5Test {
