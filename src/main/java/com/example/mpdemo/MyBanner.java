@@ -53,7 +53,7 @@ public class MyBanner implements Banner {
                 }
                 result.append('\n');
             }
-
+            //
             out.println(AnsiOutput.toString(AnsiColor.RED, result));
     }
 
