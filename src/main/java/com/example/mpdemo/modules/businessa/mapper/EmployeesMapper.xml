@@ -18,6 +18,9 @@
         last_name,gender,hire_date
     </sql>
     <select id="selectByXml" resultType="com.example.mpdemo.modules.businessa.domain.Employees">
-        select * from employees e where e.first_name like #{firstnameParam}
+        select @rownum := @rownum + 1 AS id,emp_no,first_name,
+        last_name
+        from employees e, (SELECT @rownum := 0 ) r
+        where e.first_name like #{firstnameParam}
     </select>
 </mapper>
