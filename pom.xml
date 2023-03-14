@@ -64,13 +64,15 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter-test</artifactId>
-            <version>3.5.3.1</version>
+            <!-- 高于3.5.2的版本与springboot<2.5 不兼容，请勿升级 -->
+            <version>3.5.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.3.1</version>
+            <!-- 高于3.5.2的版本与springboot<2.5 不兼容，请勿升级 -->
+            <version>3.5.2</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-spring-boot-starter -->
         <dependency>
