@@ -41,6 +41,12 @@
             <artifactId>spring-test-junit5</artifactId>
             <version>1.5.0</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>junit-jupiter-api</artifactId>
+                    <groupId>org.junit.jupiter</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
