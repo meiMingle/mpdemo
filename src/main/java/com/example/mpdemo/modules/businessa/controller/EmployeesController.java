@@ -32,8 +32,8 @@ public class EmployeesController {
         employees.setHireDate(new Date());
         Employees employees1 = new Employees();
         employees1.setEmpNo(1022221);
-        employees1.setFirstName("TestInsert0");
-        employees1.setLastName("TestInsert0");
+        employees1.setFirstName("TestInsert1");
+        employees1.setLastName("TestInsert1");
         employees1.setBirthDate(new Date());
         employees1.setHireDate(new Date());
         List<Employees> list = new ArrayList<>();
