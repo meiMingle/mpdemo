@@ -31,13 +31,15 @@ public class EmployeesController {
         employees.setBirthDate(new Date());
         employees.setHireDate(new Date());
         employees.setGender(Employees.Gender.M);
+        employees.setRemind(null);
         Employees employees1 = new Employees();
         employees1.setEmpNo(1022221);
         employees1.setFirstName("TestInsert1");
         employees1.setLastName("TestInsert1");
         employees1.setBirthDate(new Date());
         employees1.setHireDate(new Date());
-        employees.setGender(Employees.Gender.F);
+        employees1.setGender(Employees.Gender.F);
+        employees1.setRemind(null);
         List<Employees> list = new ArrayList<>();
         list.add(employees);
         list.add(employees1);
