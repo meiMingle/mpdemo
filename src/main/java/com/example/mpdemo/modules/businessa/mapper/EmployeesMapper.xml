@@ -11,11 +11,12 @@
             <result property="lastName" column="last_name" jdbcType="VARCHAR"/>
             <result property="gender" column="gender" jdbcType="OTHER"/>
             <result property="hireDate" column="hire_date" jdbcType="DATE"/>
+        <result property="remind" column="remind" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         emp_no,birth_date,first_name,
-        last_name,gender,hire_date
+        last_name,gender,hire_date,remind
     </sql>
     <select id="selectByXml" resultType="com.example.mpdemo.modules.businessa.domain.Employees">
         select @rownum := @rownum + 1 AS id,emp_no,first_name,
@@ -23,4 +24,13 @@
         from employees e, (SELECT @rownum := 0 ) r
         where e.first_name like #{firstnameParam}
     </select>
+
+    <insert id="insertList" parameterType="com.example.mpdemo.modules.businessa.domain.Employees">
+        insert into employees (
+        <include refid="Base_Column_List"/>
+        ) values
+            <foreach collection="list" item="item" separator="," index="">
+                (#{item.empNo}, #{item.birthDate},#{item.firstName},#{item.lastName},#{item.gender},#{item.hireDate},#{item.remind})
+            </foreach>
+    </insert>
 </mapper>

@@ -41,5 +41,7 @@ public class EmployeesController {
         list.add(employees1);
         employeesService.removeBatchByIds(list);
         employeesService.saveBatch(list);
+        employeesService.removeBatchByIds(list);
+        employeesService.insertBatch(list);
     }
 }

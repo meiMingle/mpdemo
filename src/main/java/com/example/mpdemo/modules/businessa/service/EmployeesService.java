@@ -13,4 +13,6 @@ import java.util.List;
 public interface EmployeesService extends IService<Employees> {
 
     List<Employees> selectByXml(String param);
+
+    void insertBatch(List<Employees> list);
 }

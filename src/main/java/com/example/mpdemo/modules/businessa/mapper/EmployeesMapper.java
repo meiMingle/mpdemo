@@ -19,6 +19,8 @@ public interface EmployeesMapper extends BaseMapper<Employees> {
     List<Employees> selectByAnnotation(String firstnameParam);
 
     List<Employees> selectByXml(String firstnameParam);
+
+    void insertList(List<Employees> list);
 }
 
 

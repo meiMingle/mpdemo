@@ -30,6 +30,11 @@ public class EmployeesServiceImpl extends ServiceImpl<EmployeesMapper, Employees
     public List<Employees> selectByXml(String param) {
         return getBaseMapper().selectByXml(param);
     }
+
+    @Override
+    public void insertBatch(List<Employees> list) {
+        getBaseMapper().insertList(list);
+    }
 }
 
 

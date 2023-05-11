@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * 
@@ -43,6 +44,8 @@ public class Employees implements Serializable {
      * 
      */
     private Date hireDate;
+
+    private String remind;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
@@ -131,53 +134,37 @@ public class Employees implements Serializable {
         this.hireDate = hireDate;
     }
 
+    public String getRemind() {
+        return remind;
+    }
+
+    public void setRemind(String remind) {
+        this.remind = remind;
+    }
+
     @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        Employees other = (Employees) that;
-        return (this.getEmpNo() == null ? other.getEmpNo() == null : this.getEmpNo().equals(other.getEmpNo()))
-            && (this.getBirthDate() == null ? other.getBirthDate() == null : this.getBirthDate().equals(other.getBirthDate()))
-            && (this.getFirstName() == null ? other.getFirstName() == null : this.getFirstName().equals(other.getFirstName()))
-            && (this.getLastName() == null ? other.getLastName() == null : this.getLastName().equals(other.getLastName()))
-            && (this.getGender() == null ? other.getGender() == null : this.getGender().equals(other.getGender()))
-            && (this.getHireDate() == null ? other.getHireDate() == null : this.getHireDate().equals(other.getHireDate()));
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employees employees = (Employees) o;
+        return Objects.equals(empNo, employees.empNo) && Objects.equals(birthDate, employees.birthDate) && Objects.equals(firstName, employees.firstName) && Objects.equals(lastName, employees.lastName) && Objects.equals(gender, employees.gender) && Objects.equals(hireDate, employees.hireDate) && Objects.equals(remind, employees.remind);
     }
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getEmpNo() == null) ? 0 : getEmpNo().hashCode());
-        result = prime * result + ((getBirthDate() == null) ? 0 : getBirthDate().hashCode());
-        result = prime * result + ((getFirstName() == null) ? 0 : getFirstName().hashCode());
-        result = prime * result + ((getLastName() == null) ? 0 : getLastName().hashCode());
-        result = prime * result + ((getGender() == null) ? 0 : getGender().hashCode());
-        result = prime * result + ((getHireDate() == null) ? 0 : getHireDate().hashCode());
-        return result;
+        return Objects.hash(empNo, birthDate, firstName, lastName, gender, hireDate, remind);
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", empNo=").append(empNo);
-        sb.append(", birthDate=").append(birthDate);
-        sb.append(", firstName=").append(firstName);
-        sb.append(", lastName=").append(lastName);
-        sb.append(", gender=").append(gender);
-        sb.append(", hireDate=").append(hireDate);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
+        return "Employees{" +
+                "empNo=" + empNo +
+                ", birthDate=" + birthDate +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender=" + gender +
+                ", hireDate=" + hireDate +
+                ", remind='" + remind + '\'' +
+                '}';
     }
 }
