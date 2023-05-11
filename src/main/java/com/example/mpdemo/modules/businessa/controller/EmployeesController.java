@@ -30,18 +30,20 @@ public class EmployeesController {
         employees.setLastName("TestInsert0");
         employees.setBirthDate(new Date());
         employees.setHireDate(new Date());
+        employees.setGender(Employees.Gender.M);
         Employees employees1 = new Employees();
         employees1.setEmpNo(1022221);
         employees1.setFirstName("TestInsert1");
         employees1.setLastName("TestInsert1");
         employees1.setBirthDate(new Date());
         employees1.setHireDate(new Date());
+        employees.setGender(Employees.Gender.F);
         List<Employees> list = new ArrayList<>();
         list.add(employees);
         list.add(employees1);
         employeesService.removeBatchByIds(list);
         employeesService.saveBatch(list);
-        employeesService.removeBatchByIds(list);
-        employeesService.insertBatch(list);
+        // employeesService.removeBatchByIds(list);
+        // employeesService.insertBatch(list);
     }
 }
